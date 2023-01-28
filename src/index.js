@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const useAxiosLoader = (ignoredUrls = []) => {
