@@ -31,6 +31,15 @@ const ExampleComponent = () => {
 }
 ```
 
+You may also pass an array of URLs to ignore. This is the single parameter accepted by this hook.
+
+```jsx
+const ignoredUrls = ['https://myignoredurl.com', 'anotherignored.com']
+const [loading] = useAxiosLoader(ignoredUrls)
+```
+
+All urls passed, won't trigger the loader.
+
 ## License
 
 MIT © [olivier1208](https://github.com/olivier1208)
