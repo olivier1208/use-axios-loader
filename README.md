@@ -8,6 +8,7 @@
 
 ```bash
 npm install --save use-axios-loader
+yarn add use-axios-loader
 ```
 
 ## Usage
@@ -15,20 +16,23 @@ npm install --save use-axios-loader
 ```jsx
 import React, { Component } from 'react'
 
-import { useMyHook } from 'use-axios-loader'
+import { useAxiosLoader } from 'use-axios-loader'
 
-const Example = () => {
-  const example = useMyHook()
+const ExampleComponent = () => {
+  const [loading] = useAxiosLoader()
   return (
-    <div>{example}</div>
+    <>
+      {loading
+      ? <img src="path/to/loader"}/>
+      : <div>My data</div>
+      }
+    </>
   )
 }
 ```
 
 ## License
 
-MIT © [scorpioliv](https://github.com/scorpioliv)
+MIT © [olivier1208](https://github.com/olivier1208)
 
 ---
-
-This hook is created using [create-react-hook](https://github.com/hermanya/create-react-hook).
