@@ -1,7 +1,6 @@
-import axios from 'axios'
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const useAxiosLoader = (ignoredUrls = []) => {
+export const useAxiosLoader = (axios , ignoredUrls = []) => {
     const [counter, setCounter] = useState(0);
     const inc = useCallback(() => setCounter(counter => counter + 1), [setCounter]);
     const dec = useCallback(() => setCounter(counter => counter - 1), [setCounter]);
