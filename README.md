@@ -15,11 +15,13 @@ yarn add use-axios-loader
 
 ```jsx
 import React, { Component } from 'react'
+import axiosInstance from 'axios'
 
 import { useAxiosLoader } from 'use-axios-loader'
 
 const ExampleComponent = () => {
-  const [loading] = useAxiosLoader()
+  //Pass the axios instance to the hook
+  const [loading] = useAxiosLoader(axiosInstance)
   return (
     <>
       {loading
@@ -30,6 +32,7 @@ const ExampleComponent = () => {
   )
 }
 ```
+Yo
 
 You may also pass an array of URLs to ignore. This is the single parameter accepted by this hook.
 
