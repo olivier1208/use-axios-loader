@@ -20,7 +20,8 @@ import axiosInstance from 'axios'
 import { useAxiosLoader } from 'use-axios-loader'
 
 const ExampleComponent = () => {
-  //Pass the axios instance to the hook
+  // Pass the axios instance to the hook
+  // Allows you tu customize easily your instance
   const [loading] = useAxiosLoader(axiosInstance)
   return (
     <>
@@ -32,7 +33,6 @@ const ExampleComponent = () => {
   )
 }
 ```
-Yo
 
 You may also pass an array of URLs to ignore. This is the single parameter accepted by this hook.
 
