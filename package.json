@@ -1,6 +1,6 @@
 {
   "name": "use-axios-loader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A tiny package to add a loader to all axios instances",
   "author": "scorpioliv",
   "license": "MIT",
