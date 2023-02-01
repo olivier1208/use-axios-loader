@@ -4,7 +4,7 @@
   "description": "A tiny package to add a loader to all axios instances",
   "author": "scorpioliv",
   "license": "MIT",
-  "repository": "scorpioliv/use-axios-loader",
+  "repository": "olivier1208/use-axios-loader",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
