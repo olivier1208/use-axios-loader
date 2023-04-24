@@ -37,11 +37,11 @@ const MyComponent = () => {
 }
 ```
 
-You may also pass an array of URLs to ignore. This is the single parameter accepted by this hook.
+You may also pass an array of URLs to ignore. This is the second parameter accepted by this hook.
 
 ```jsx
 const ignoredUrls = ['https://myignoredurl.com', 'anotherignored.co']
-const [loading] = useAxiosLoader(ignoredUrls)
+const [loading] = useAxiosLoader(axiosInstance, ignoredUrls)
 ```
 
 All urls passed in the `ignoredUrls` variable, won't trigger the loader.
