@@ -1,7 +1,8 @@
 {
   "name": "use-axios-loader",
   "version": "1.0.6",
-  "description": "A tiny package to add a loader to all axios instances",
+  "description": "A tiny react hook to add a loader to all axios instances",
+  "keywords": ["react", "hooks", "react-hooks", "axios", "loader", "axios-loader"],
   "author": "scorpioliv",
   "license": "MIT",
   "repository": "olivier1208/use-axios-loader",
