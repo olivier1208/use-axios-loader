@@ -1,6 +1,6 @@
 {
   "name": "use-axios-loader",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A tiny react hook to add a loader to all axios instances",
   "keywords": [
     "react",
