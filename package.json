@@ -17,17 +17,13 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "engines": {
-    "node": ">=8",
-    "npm": ">=5"
+    "node": ">=18",
+    "npm": ">=8"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "prepare": "yarn run build"
   },
   "peerDependencies": {
     "react": "^18.2.0"
@@ -55,7 +51,6 @@
     "@babel/preset-react": "^7.23.3",
     "@testing-library/react-hooks": "^8.0.1",
     "babel-eslint": "^10.1.0",
-    "cross-env": "^5.2.0",
     "eslint": "5.16.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
@@ -64,7 +59,6 @@
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "gh-pages": "^2.0.1",
     "react": "^16.9.0",
     "react-scripts": "^3.4.0",
     "react-test-renderer": "^16.9.0",
@@ -76,6 +70,6 @@
     "rollup-plugin-url": "^2.1.0"
   },
   "dependencies": {
-    "axios": "^1.6.7"
+    "axios": "^1.7.2"
   }
 }
