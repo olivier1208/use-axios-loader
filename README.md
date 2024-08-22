@@ -46,8 +46,8 @@ const [loading] = useAxiosLoader(axiosInstance, ignoredUrls)
 
 All urls passed in the `ignoredUrls` variable, won't trigger the loader.
 
+---
 ## License
 
 MIT © [olivier1208](https://github.com/olivier1208)
 
----
