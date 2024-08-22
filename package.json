@@ -12,7 +12,9 @@
   ],
   "author": "scorpioliv",
   "license": "MIT",
-  "repository": "olivier1208/use-axios-loader",
+  "repository": {
+    "url": "olivier1208/use-axios-loader"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
