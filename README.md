@@ -1,4 +1,4 @@
-# use-axios-loader
+# ![](https://github.com/olivier1208/use-axios-loader/tree/master/src/logo.svg) use-axios-loader
 
 > `use-axios-loader` is a tiny React Hook, designed  to easily add a loader to all your axios instances.
 
@@ -29,7 +29,7 @@ const MyComponent = () => {
   return (
     <>
       {loading
-      ? <img src="path/to/loader"}/>
+      ? <img src="path/to/loader"/>
       : <div>My data</div>
       }
     </>
