@@ -1,4 +1,4 @@
-# ![](https://github.com/olivier1208/use-axios-loader/tree/master/src/logo.svg) use-axios-loader
+# ![](https://github.com/olivier1208/use-axios-loader/blob/master/src/logo.svg?raw=true) use-axios-loader
 
 > `use-axios-loader` is a tiny React Hook, designed  to easily add a loader to all your axios instances.
 
