@@ -1,28 +1,25 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import external from 'rollup-plugin-peer-deps-external'
-import resolve from 'rollup-plugin-node-resolve'
-import url from 'rollup-plugin-url'
-
-
-import pkg from './package.json' assert { type: "json" };
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import url from '@rollup/plugin-url'
+import json from '@rollup/plugin-json'
 
 export default {
   input: 'src/index.js',
   output: [
     {
-      file: pkg.main,
+      file: 'dist/bundle.cjs.js', // Replace pkg.main if needed
       format: 'cjs',
       sourcemap: true
     },
     {
-      file: pkg.module,
+      file: 'dist/bundle.esm.js', // Replace pkg.module if needed
       format: 'es',
       sourcemap: true
     }
   ],
   plugins: [
-    external(),
+    json(),
     url({ exclude: ['**/*.svg'] }),
     babel({
       exclude: 'node_modules/**'
