@@ -64,6 +64,6 @@
     "rollup-plugin-url": "^3.0.1"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.9"
   }
 }
