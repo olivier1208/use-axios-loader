@@ -1,11 +1,10 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import external from 'rollup-plugin-peer-deps-external'
-import resolve from 'rollup-plugin-node-resolve'
-import url from 'rollup-plugin-url'
+import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import external from 'rollup-plugin-peer-deps-external';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import url from '@rollup/plugin-url';
 
-
-import pkg from './package.json' assert { type: "json" };
+import pkg from './package.json' with { type: 'json' };
 
 export default {
   input: 'src/index.js',
@@ -13,21 +12,23 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'auto',
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   plugins: [
     external(),
+    nodeResolve(),
     url({ exclude: ['**/*.svg'] }),
+    commonjs(),
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
     }),
-    resolve(),
-    commonjs()
-  ]
-}
+  ],
+};
