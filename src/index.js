@@ -2,18 +2,23 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const useAxiosLoader = (axios , ignoredUrls = []) => {
     const [counter, setCounter] = useState(0);
-    const inc = useCallback(() => setCounter(counter => counter + 1), [setCounter]);
-    const dec = useCallback(() => setCounter(counter => counter - 1), [setCounter]);
+    const inc = useCallback(() => setCounter(c => c + 1), []);
+    const dec = useCallback(() => setCounter(c => Math.max(0, c - 1)), []);
 
     const urlIsIgnored = url => {
-        return ignoredUrls.some(ignoredUrl => ignoredUrl.test(url));
+        return ignoredUrls.some(ignoredUrl => {
+            if (ignoredUrl instanceof RegExp) {
+                return ignoredUrl.test(url);
+            }
+            return url === ignoredUrl;
+        });
     }
 
     const interceptors = useMemo(() => ({
         request: config => (!urlIsIgnored(config.url) && inc(), config),
-        response: response => ((counter >= 0 && dec()), response), // Decrement ONLY if counter has been incremented (avoid minus values)
-        error: error => ((counter >= 0 && dec()), Promise.reject(error)),
-    }), [inc, dec]); // create the interceptors
+        response: response => (dec(), response),
+        error: error => (dec(), Promise.reject(error)),
+    }), [inc, dec, ignoredUrls]); // added ignoredUrls to dependencies
 
     useEffect(() => {
         // add request interceptors
@@ -25,8 +30,7 @@ export const useAxiosLoader = (axios , ignoredUrls = []) => {
             axios.interceptors.request.eject(reqInterceptor);
             axios.interceptors.response.eject(resInterceptor);
         };
-    }, [interceptors]);
+    }, [axios, interceptors]); // added axios to dependencies
 
-    counter < 0  && setCounter(0)
     return [counter > 0]
 };
