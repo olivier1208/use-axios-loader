@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.5 - 2026-03-23
+
+### Fixed
+
+- Remove the unused lint-only dependencies that forced Node 20+ during `yarn install`, restoring CI compatibility on Node `18.x`.
+
+### Changed
+
+- Keep the published package focused on build, test, and runtime dependencies only.
+
 ## 1.4.4 - 2026-03-23
 
 ### Fixed
