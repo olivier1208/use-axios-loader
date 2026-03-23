@@ -1,4 +1,4 @@
-# <p align="center"><img src="https://raw.githubusercontent.com/olivier1208/use-axios-loader/main/src/logo.svg" width="88" height="88" alt="use-axios-loader logo" /><br />use-axios-loader</p>
+# <p align="center"><img src="https://raw.githubusercontent.com/olivier1208/use-axios-loader/master/src/logo.svg" width="88" height="88" alt="use-axios-loader logo" /><br />use-axios-loader</p>
 
 <p align="center">Tiny React hook that turns axios request activity into a single loading boolean.</p>
 
