@@ -1,6 +1,6 @@
 {
   "name": "use-axios-loader",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Tiny React hook that turns axios request activity into a single loading boolean",
   "files": [
     "dist",
@@ -59,6 +59,6 @@
     "rollup": "^4.59.0"
   },
   "resolutions": {
-    "test-exclude": "8.0.0"
+    "test-exclude": "7.0.2"
   }
 }

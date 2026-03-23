@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.4 - 2026-03-23
+
+### Fixed
+
+- Point the README logo at the existing `master` branch so the image no longer returns `404`.
+- Keep the `test-exclude` security override on a Node 18-compatible version so the CI matrix passes on `18.x` again.
+
+### Changed
+
+- Prepare the repository for a fresh GitHub release after the `v1.4.3` tag-only release state.
+
 ## 1.4.3 - 2026-03-23
 
 ### Fixed
