@@ -1,6 +1,6 @@
 {
   "name": "use-axios-loader",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "files": [
     "dist"
   ],
@@ -72,5 +72,8 @@
   "dependencies": {
     "axios": "^1.13.6",
     "browserslist": "^4.28.1"
+  },
+  "resolutions": {
+    "test-exclude": "8.0.0"
   }
 }
