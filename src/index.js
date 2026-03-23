@@ -1,36 +1,68 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-export const useAxiosLoader = (axios , ignoredUrls = []) => {
-    const [counter, setCounter] = useState(0);
-    const inc = useCallback(() => setCounter(c => c + 1), []);
-    const dec = useCallback(() => setCounter(c => Math.max(0, c - 1)), []);
+const KEY = '__uaxl';
 
-    const urlIsIgnored = url => {
-        return ignoredUrls.some(ignoredUrl => {
-            if (ignoredUrl instanceof RegExp) {
-                return ignoredUrl.test(url);
-            }
-            return url === ignoredUrl;
-        });
-    }
+const isIgnored = (list, url) =>
+  list.some((item) => (item instanceof RegExp ? item.test(url) : item === url));
 
-    const interceptors = useMemo(() => ({
-        request: config => (!urlIsIgnored(config.url) && inc(), config),
-        response: response => (dec(), response),
-        error: error => (dec(), Promise.reject(error)),
-    }), [inc, dec, ignoredUrls]); // added ignoredUrls to dependencies
+export const useAxiosLoader = (axios, ignoredUrls = []) => {
+  const [loading, setLoading] = useState(false);
+  const activeRef = useRef(0);
+  const ignoredRef = useRef(ignoredUrls);
 
-    useEffect(() => {
-        // add request interceptors
-        const reqInterceptor = axios.interceptors.request.use(interceptors.request, interceptors.error);
-        // add response interceptors
-        const resInterceptor = axios.interceptors.response.use(interceptors.response, interceptors.error);
-        return () => {
-            // remove all intercepts when done
-            axios.interceptors.request.eject(reqInterceptor);
-            axios.interceptors.response.eject(resInterceptor);
-        };
-    }, [axios, interceptors]); // added axios to dependencies
+  ignoredRef.current = ignoredUrls;
 
-    return [counter > 0]
+  useEffect(() => {
+    activeRef.current = 0;
+    setLoading(false);
+
+    const stop = (config) => {
+      if (!config || !config[KEY] || !activeRef.current) {
+        return;
+      }
+
+      delete config[KEY];
+
+      if (!--activeRef.current) {
+        setLoading(false);
+      }
+    };
+
+    const requestId = axios.interceptors.request.use(
+      (config) => {
+        if (!isIgnored(ignoredRef.current, config && config.url)) {
+          config[KEY] = 1;
+
+          if (!activeRef.current++) {
+            setLoading(true);
+          }
+        }
+
+        return config;
+      },
+      (error) => {
+        stop(error && error.config);
+        return Promise.reject(error);
+      },
+    );
+
+    const responseId = axios.interceptors.response.use(
+      (response) => {
+        stop(response && response.config);
+        return response;
+      },
+      (error) => {
+        stop((error && error.config) || (error && error.response && error.response.config));
+        return Promise.reject(error);
+      },
+    );
+
+    return () => {
+      axios.interceptors.request.eject(requestId);
+      axios.interceptors.response.eject(responseId);
+      activeRef.current = 0;
+    };
+  }, [axios]);
+
+  return [loading];
 };

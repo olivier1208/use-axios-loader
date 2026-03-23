@@ -1,34 +1,22 @@
-import { babel } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import external from 'rollup-plugin-peer-deps-external';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import url from '@rollup/plugin-url';
+import { createRequire } from 'node:module';
 
-import pkg from './package.json' with { type: 'json' };
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 export default {
   input: 'src/index.js',
+  external: ['react'],
   output: [
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true,
-      exports: 'auto',
+      exports: 'named',
+      compact: true,
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true,
+      compact: true,
     },
-  ],
-  plugins: [
-    external(),
-    nodeResolve(),
-    url({ exclude: ['**/*.svg'] }),
-    commonjs(),
-    babel({
-      exclude: 'node_modules/**',
-      babelHelpers: 'bundled',
-    }),
   ],
 };

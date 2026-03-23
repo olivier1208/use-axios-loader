@@ -1,16 +1,11 @@
 {
   "name": "use-axios-loader",
-  "version": "1.4.2",
+  "version": "1.4.3",
+  "description": "Tiny React hook that turns axios request activity into a single loading boolean",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
-  ],
-  "description": "A tiny react hook to add a loader to all axios instances",
   "keywords": [
     "react",
     "hooks",
@@ -28,14 +23,12 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
-  "engines": {
-    "node": ">=20",
-    "npm": ">=8"
-  },
+  "sideEffects": false,
   "scripts": {
-    "build": "rollup -c",
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
+    "prepare": "npm run build",
+    "size": "npm run build && node -e \"const fs=require('fs');const zlib=require('zlib');const source=fs.readFileSync('dist/index.es.js');console.log(zlib.gzipSync(source,{level:9}).length+' B gzip');\"",
     "test": "jest"
   },
   "jest": {
@@ -45,20 +38,17 @@
     }
   },
   "peerDependencies": {
-    "react": "^18.3.1"
+    "axios": ">=0.19",
+    "react": ">=16.8"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
-    "@rollup/plugin-babel": "^6.1.0",
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-url": "^8.0.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
+    "axios": "^1.13.6",
     "babel-jest": "^30.2.0",
     "eslint": "^10.0.2",
     "identity-obj-proxy": "^3.0.0",
@@ -66,12 +56,7 @@
     "jest-environment-jsdom": "^30.2.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "rollup": "^4.59.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
-  },
-  "dependencies": {
-    "axios": "^1.13.6",
-    "browserslist": "^4.28.1"
+    "rollup": "^4.59.0"
   },
   "resolutions": {
     "test-exclude": "8.0.0"

@@ -54,13 +54,15 @@ describe('useAxiosLoader', () => {
 
     const { result } = renderHook(() => useAxiosLoader(axiosMock));
 
+    let trackedConfig;
+
     act(() => {
-      requestInterceptor({ url: 'http://example.com' });
+      trackedConfig = requestInterceptor({ url: 'http://example.com' });
     });
     expect(result.current[0]).toBe(true);
 
     act(() => {
-      responseInterceptor({ data: 'ok' });
+      responseInterceptor({ config: trackedConfig });
     });
     expect(result.current[0]).toBe(false);
   });
@@ -94,6 +96,44 @@ describe('useAxiosLoader', () => {
 
     act(() => {
       requestInterceptor({ url: 'http://example.com/ignore-me' });
+    });
+
+    expect(result.current[0]).toBe(false);
+  });
+
+  it('should not clear loading when an ignored request finishes', () => {
+    let requestInterceptor;
+    let responseInterceptor;
+    axiosMock.interceptors.request.use.mockImplementation((req) => {
+      requestInterceptor = req;
+      return 'req-id';
+    });
+    axiosMock.interceptors.response.use.mockImplementation((res) => {
+      responseInterceptor = res;
+      return 'res-id';
+    });
+
+    const ignoredUrls = ['http://example.com/ignore-me'];
+    const { result } = renderHook(() => useAxiosLoader(axiosMock, ignoredUrls));
+
+    let trackedConfig;
+    let ignoredConfig;
+
+    act(() => {
+      trackedConfig = requestInterceptor({ url: 'http://example.com/users' });
+      ignoredConfig = requestInterceptor({ url: 'http://example.com/ignore-me' });
+    });
+
+    expect(result.current[0]).toBe(true);
+
+    act(() => {
+      responseInterceptor({ config: ignoredConfig });
+    });
+
+    expect(result.current[0]).toBe(true);
+
+    act(() => {
+      responseInterceptor({ config: trackedConfig });
     });
 
     expect(result.current[0]).toBe(false);
