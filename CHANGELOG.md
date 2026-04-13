@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.6 - 2026-04-12
+
+### Security
+
+- Require Axios `>=1.15.0` so consumers avoid the vulnerable NO_PROXY hostname normalization behavior tracked as `GHSA-3p68-rc4w-qgx5` / `CVE-2025-62718`.
+- Update the development Axios dependency and lockfile to Axios `1.15.0`, which includes the upstream proxy matching fix.
+
 ## 1.4.5 - 2026-03-23
 
 ### Fixed
